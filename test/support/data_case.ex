@@ -15,6 +15,7 @@ defmodule EventsApi.DataCase do
   """
 
   use ExUnit.CaseTemplate
+  alias Ecto.Adapters.SQL.Sandbox
 
   using do
     quote do
@@ -28,10 +29,10 @@ defmodule EventsApi.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(EventsApi.Repo)
+    :ok = Sandbox.checkout(EventsApi.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(EventsApi.Repo, {:shared, self()})
+      Sandbox.mode(EventsApi.Repo, {:shared, self()})
     end
 
     :ok
