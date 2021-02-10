@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configuração do credo para garantir qualidade de código
 - Configuração Sobelow para garantir segurança da aplicação
 - inclusão de arquivos de documentação e licença
+- configuração do coveralls garante a cobertura de testes da aplicação
