@@ -11,3 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configuração Sobelow para garantir segurança da aplicação
 - inclusão de arquivos de documentação e licença
 - configuração do coveralls garante a cobertura de testes da aplicação
+- configuração do travis ci para garantir o processo de integração contínua
+- configuração codecov para relatório de teste
+- configuração de CD
