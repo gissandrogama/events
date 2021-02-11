@@ -47,5 +47,11 @@ defmodule EventsApi.AccountsTest do
       assert {:error, %Ecto.Changeset{} = changeset} = Accounts.create_user(params)
       %{email: ["E-mail inválido!"]} = errors_on(changeset)
     end
+
+    test "retornando um usuário pelo id" do
+      {:ok, user} = Accounts.create_user(@valid_params)
+
+      assert Accounts.get_user!(user.id).name == "Henry"
+    end
   end
 end
