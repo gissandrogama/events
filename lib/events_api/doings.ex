@@ -28,4 +28,8 @@ defmodule EventsApi.Doings do
   def list_events do
     Repo.all(Event)
   end
+
+  def get_event!(id) do
+    Repo.get!(Event, id)
+  end
 end

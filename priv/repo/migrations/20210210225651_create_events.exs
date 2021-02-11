@@ -7,7 +7,7 @@ defmodule EventsApi.Repo.Migrations.CreateEvents do
       add :title, :string
       add :date_initial, :string
       add :date_finish, :string
-      add :description, :string
+      add :description, :text
       add :start_time, :string
       add :end_time, :string
       add :place, :string
