@@ -1,12 +1,12 @@
 defmodule EventsApiWeb.FallbackController do
   @moduledoc """
-  Translates controller action results into valid `Plug.Conn` responses.
+  Traduz os resultados da ação do controlador em respostas `Plug.Conn` válidas.
 
-  See `Phoenix.Controller.action_fallback/1` for more details.
+  Veja `Phoenix.Controller.action_fallback/1` para mais detalhes.
   """
   use EventsApiWeb, :controller
 
-  # This clause handles errors returned by Ecto's insert/update/delete.
+  # Esta cláusula trata os erros retornados pela inserção/atualização/exclusão do Ecto.
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
@@ -14,7 +14,7 @@ defmodule EventsApiWeb.FallbackController do
     |> render("error.json", changeset: changeset)
   end
 
-  # This clause is an example of how to handle resources that cannot be found.
+  # Esta cláusula é um exemplo de como lidar com recursos que não podem ser encontrados.
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
