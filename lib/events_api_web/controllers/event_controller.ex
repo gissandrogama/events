@@ -6,7 +6,7 @@ defmodule EventsApiWeb.EventController do
   action_fallback EventsApiWeb.FallbackController
 
   def index(conn, _params) do
-    with events <- Doings.list_events do
+    with events <- Doings.list_events() do
       render(conn, "index.json", events: events)
     end
   end
