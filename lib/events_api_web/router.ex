@@ -9,6 +9,7 @@ defmodule EventsApiWeb.Router do
     pipe_through :api
 
     post "/users", UserController, :create
+    get "/users/:id", UserController, :show
   end
 
   # Enables LiveDashboard only for development

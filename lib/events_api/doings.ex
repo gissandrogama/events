@@ -24,4 +24,8 @@ defmodule EventsApi.Doings do
     |> Event.changeset(attrs)
     |> Repo.insert()
   end
+
+  def list_events do
+    Repo.all(Event)
+  end
 end

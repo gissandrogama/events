@@ -9,7 +9,14 @@ defmodule EventsApiWeb.UserController do
     with {:ok, user} <- Accounts.create_user(user_params) do
       conn
       |> put_status(:created)
-      |> render("user.json", user: user)
+      |> put_resp_header("location", Routes.user_path(conn, :show, user))
+      |> render("show.json", user: user)
+    end
+  end
+
+  def show(conn, %{"id" => id}) do
+    with user <- Accounts.get_user!(id) do
+      render(conn, "show.json", user: user)
     end
   end
 end

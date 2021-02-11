@@ -23,7 +23,6 @@ defmodule EventsApi.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:name, :email, :password])
-    |> cast_assoc(:events, with: &Event.changeset/2)
     |> validate_required([:name], message: "É necessário preencher o nome")
     |> validate_email()
     |> validate_password()
