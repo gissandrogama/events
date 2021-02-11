@@ -1,7 +1,7 @@
 defmodule EventsApi.Doings.Event do
   use Ecto.Schema
   import Ecto.Changeset
-  alias EventsApi.Account.User
+  alias EventsApi.Accounts.User
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
