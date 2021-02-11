@@ -1,4 +1,7 @@
 defmodule EventsApi.Doings.Event do
+  @moduledoc """
+  Modulo de schema da tabela `events`, ele possui função que valida as informações de um `map`.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias EventsApi.Accounts.User
@@ -23,8 +26,30 @@ defmodule EventsApi.Doings.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:title, :date_initial, :date_finish, :description, :start_time, :end_time, :place, :andress, :url_img, :user_id])
+    |> cast(attrs, [
+      :title,
+      :date_initial,
+      :date_finish,
+      :description,
+      :start_time,
+      :end_time,
+      :place,
+      :andress,
+      :url_img,
+      :user_id
+    ])
     |> foreign_key_constraint(:user_id)
-    |> validate_required([:title, :date_initial, :date_finish, :description, :start_time, :end_time, :place, :andress, :url_img, :user_id])
+    |> validate_required([
+      :title,
+      :date_initial,
+      :date_finish,
+      :description,
+      :start_time,
+      :end_time,
+      :place,
+      :andress,
+      :url_img,
+      :user_id
+    ])
   end
 end

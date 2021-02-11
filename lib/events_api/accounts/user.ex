@@ -1,4 +1,7 @@
 defmodule EventsApi.Accounts.User do
+  @moduledoc """
+  Modulo de schema da tabela `users`, ele possui função que valida as informações de um `map`.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
