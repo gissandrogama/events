@@ -12,12 +12,13 @@ defmodule EventsApi.Accounts do
 
   ## Examples
 
-      iex> create_user(%{field: value})
-      {:ok, %User{}}
+      iex> EventsApi.create_user(%{field: value})
+      {:ok, %EventsApi.Accounts.User{}}
+
+      iex> EventsApi.create_user(%{field: bad_value})
 
       iex> create_user(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def create_user(attrs \\ %{}) do
     %User{}
@@ -25,7 +26,27 @@ defmodule EventsApi.Accounts do
     |> Repo.insert()
   end
 
+  @doc """
+  Essa função busca um usuário pelo `id`.
+
+  ## Paramentros da função
+  - id: `id` numero de indentificação do usuário
+
+  ## Informações adcionais
+    - caso id estaja incorreto ou não exista é retornado um erro.
+
+  ## Example empty lists
+
+       iex> user = EventsApi.Accounts.create_user(%{email: "teste@email.com", name: "teste 1", password: "123123"})
+       iex> get_user(user.id)
+       {:ok, %EventsApi.Accounts.User{}}
+
+  """
   def get_user!(id) do
-    Repo.get!(User, id)
+    Repo.get_by(User, id: id)
+    |> case do
+      nil -> {:error, :not_found}
+      user -> {:ok, user}
+    end
   end
 end

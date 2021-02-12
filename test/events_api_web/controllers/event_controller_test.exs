@@ -1,6 +1,6 @@
 defmodule EventsApiWeb.EnvetControllerTest do
   use EventsApiWeb.ConnCase, async: true
-
+  import EventsApiWeb.Auth.Guardian
   import EventsApi.UserFixture
   alias EventsApi.Doings
 
@@ -47,13 +47,34 @@ defmodule EventsApiWeb.EnvetControllerTest do
       assert %{"id" => id} = json_response(conn, 200)
       assert id == event.id
     end
+
+    test "returnar erro quando evento não existe", %{conn: conn} do
+      user = user_fixture()
+      params = Map.put(@valid_event, :user_id, user.id)
+      Doings.create_event(params)
+      id_ivalid = "b1c75040-670a-4043-9a1f-cdeedb227ed1"
+
+      conn = get(conn, Routes.event_path(conn, :show, id_ivalid))
+
+      assert %{"errors" => %{"detail" => "Not Found"}} = json_response(conn, 404)
+    end
   end
 
   describe "create/2" do
-    test "retornar um evento quando parametros validos", %{conn: conn} do
+    setup %{conn: conn} do
       user = user_fixture()
-      params = Map.put(@valid_event, :user_id, user.id)
-      conn = post(conn, Routes.event_path(conn, :create), event: params)
+      {:ok, token, _} = encode_and_sign(user, %{}, token_type: :access)
+
+      conn =
+        conn
+        |> put_req_header("accept", "application/json")
+        |> put_req_header("authorization", "bearer " <> token)
+
+      {:ok, conn: conn}
+    end
+
+    test "retornar um evento quando parametros validos", %{conn: conn} do
+      conn = post(conn, Routes.event_path(conn, :create), event: @valid_event)
       assert %{"id" => id} = json_response(conn, 201)
 
       conn = get(conn, Routes.event_path(conn, :show, id))
@@ -72,6 +93,26 @@ defmodule EventsApiWeb.EnvetControllerTest do
                "url_img" => "url img",
                "user_id" => _
              } = json_response(conn, 200)
+    end
+  end
+
+  describe "create/2 sem atenticação" do
+    test "retornar erro usuário não autenticado", %{conn: conn} do
+      conn = post(conn, Routes.event_path(conn, :create), event: @valid_event)
+      assert %{"error" => "Token não encontrado"} = json_response(conn, 401)
+    end
+
+    test "retornar erro se o token for invalido", %{conn: conn} do
+      conn =
+        conn
+        |> put_req_header("accept", "application/json")
+        |> put_req_header(
+          "authorization",
+          "bearer " <> "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJldmVudHNfYXBpIiwiZXhwI"
+        )
+
+      conn = post(conn, Routes.event_path(conn, :create), event: @valid_event)
+      assert %{"error" => "Token expirado ou inválido"} = json_response(conn, 401)
     end
   end
 end

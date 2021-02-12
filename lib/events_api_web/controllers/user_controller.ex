@@ -2,6 +2,7 @@ defmodule EventsApiWeb.UserController do
   use EventsApiWeb, :controller
 
   alias EventsApi.Accounts
+  alias EventsApiWeb.Auth.Guardian
 
   action_fallback EventsApiWeb.FallbackController
 
@@ -14,8 +15,16 @@ defmodule EventsApiWeb.UserController do
     end
   end
 
+  def signin(conn, %{"email" => email, "password" => password}) do
+    with {:ok, user, token} <- Guardian.authenticate(email, password) do
+      conn
+      |> put_status(:created)
+      |> render("user_auth.json", user: user, token: token)
+    end
+  end
+
   def show(conn, %{"id" => id}) do
-    with user <- Accounts.get_user!(id) do
+    with {:ok, user} <- Accounts.get_user!(id) do
       render(conn, "show.json", user: user)
     end
   end

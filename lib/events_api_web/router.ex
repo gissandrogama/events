@@ -5,14 +5,25 @@ defmodule EventsApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug EventsApiWeb.Auth.Pipeline
+  end
+
   scope "/api", EventsApiWeb do
     pipe_through :api
 
     post "/users", UserController, :create
-    get "/users/:id", UserController, :show
-    post "/events", EventController, :create
+
+    post "/signin", UserController, :signin
     get "/events", EventController, :index
     get "/events/:id", EventController, :show
+    get "/users/:id", UserController, :show
+  end
+
+  scope "/api", EventsApiWeb do
+    pipe_through [:api, :auth]
+
+    post "/events", EventController, :create
   end
 
   # Enables LiveDashboard only for development

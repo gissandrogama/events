@@ -6,6 +6,16 @@ defmodule EventsApiWeb.UserView do
     render_one(user, UserView, "user.json")
   end
 
+  def render("user_auth.json", %{user: user, token: token}) do
+    %{
+      user: %{
+        name: user.name,
+        email: user.email,
+        token: token
+      }
+    }
+  end
+
   def render("user.json", %{user: user}) do
     %{
       id: user.id,
