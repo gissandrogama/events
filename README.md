@@ -93,6 +93,7 @@ caso queira usar o insomnia, segue um arquivo já com as rotas para ultilizar
 # Deploy
 A aplicação está no gigalixir no endereço <https://events.gigalixirapp.com/api/events>. Um dos motivos de escolher o gigalixir é que não tem sleeps da aplicação no plano free.
 
+
 # Gerar documentação da aplicação
 
 ```sh
