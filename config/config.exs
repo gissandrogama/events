@@ -28,7 +28,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # config guardian
-config :events_api, EventsApi.Auth.Guardian,
+config :events_api, EventsApiWeb.Auth.Guardian,
   issuer: "events_api",
   secret_key: System.get_env("GUARDIAN_SECRET") || "1321231"
 

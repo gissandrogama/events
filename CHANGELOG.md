@@ -26,4 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - teste para regras de negócios
 - add lib guardian para autenticação
 
+## [0.0.1] - 2021-02-12
+### Added
+- criação de modulos do guardian: Guardian, Pipeline e error_handler
+- Adição de rota e função signin no controller do usuário
+
 

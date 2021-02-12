@@ -10,6 +10,7 @@ defmodule EventsApiWeb.Router do
 
     post "/users", UserController, :create
     get "/users/:id", UserController, :show
+    post "/signin", UserController, :signin
     post "/events", EventController, :create
     get "/events", EventController, :index
     get "/events/:id", EventController, :show
