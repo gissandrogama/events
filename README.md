@@ -82,7 +82,7 @@ Metodo | endpoint   | descrição | valores que podem ser passados para os param
 post | /api/users | nesse endpoint é possivel criar um usuário | name, email e password
 get | /api/users/:id | listar um usuário pelo id | id
 post | /api/signin | atenticar um usuário | email e password
-post | /api/events | esse endpoint cria um evento | title, date_initial, date_finish, description,|start_time, end_time, place, andress, url_img
+post | /api/events | esse endpoint cria um evento | title, date_initial, date_finish, description,start_time, end_time, place, andress, url_img
 get | /api/events/:id | lista um evento pelo id | id do evento
 get | /api/events | lista todos os eventos |
 

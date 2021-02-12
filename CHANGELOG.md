@@ -34,4 +34,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - teste de autenticação
 - teste de token
 - teste de signin
+- escrita da documentação
+- escrita do readme
 
