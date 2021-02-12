@@ -12,7 +12,7 @@ defmodule EventsApiWeb.EventController do
   end
 
   def create(conn, %{"event" => event_params}) do
-    user = Guardian.Plug.current_resource(conn)
+    {:ok, user} = Guardian.Plug.current_resource(conn)
 
     event_params = Map.put(event_params, "user_id", user.id)
 

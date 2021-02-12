@@ -19,6 +19,15 @@ defmodule EventsApiWeb.UserControllerTest do
       assert %{"nome" => "Henry", "email" => "henry@email.com", "id" => _} =
                json_response(conn, 200)
     end
+
+    test "returnar erro quando usuário não existe", %{conn: conn} do
+      user_fixture()
+      id_ivalid = "b1c75040-670a-4043-9a1f-cdeedb227ed1"
+
+      conn = get(conn, Routes.user_path(conn, :show, id_ivalid))
+
+      assert %{"errors" => %{"detail" => "Not Found"}} = json_response(conn, 404)
+    end
   end
 
   describe "signin" do

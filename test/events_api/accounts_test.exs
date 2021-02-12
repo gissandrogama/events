@@ -50,8 +50,9 @@ defmodule EventsApi.AccountsTest do
 
     test "retornando um usuário pelo id" do
       {:ok, user} = Accounts.create_user(@valid_params)
+      {:ok, result} = Accounts.get_user!(user.id)
 
-      assert Accounts.get_user!(user.id).name == "Henry"
+      assert result.name == "Henry"
     end
   end
 end
