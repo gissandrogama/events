@@ -16,8 +16,9 @@ defmodule EventsApi.Accounts do
       {:ok, %EventsApi.Accounts.User{}}
 
       iex> EventsApi.create_user(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
 
+      iex> create_user(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
   """
   def create_user(attrs \\ %{}) do
     %User{}

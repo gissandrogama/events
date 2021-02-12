@@ -17,13 +17,13 @@ defmodule EventsApi.Doings do
 
       iex> create_event(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def create_event(attrs \\ %{}) do
     %Event{}
     |> Event.changeset(attrs)
     |> Repo.insert()
   end
+
 
   @doc """
   Função lista todos os eventos persistidos no banco de dados.
