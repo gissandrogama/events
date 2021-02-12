@@ -1,11 +1,11 @@
 defmodule EventsApiWeb.Auth.Guardian do
   @moduledoc """
-  has functions that authenticate a user and generate token
+  Modulo tem funções que autenticam um usuário e geram token
   """
   use Guardian, otp_app: :events_api
 
-  alias EventsApi.Accounts.Auth.Session
   alias EventsApi.Accounts
+  alias EventsApi.Accounts.Auth.Session
 
   def subject_for_token(user, _claims), do: {:ok, to_string(user.id)}
 

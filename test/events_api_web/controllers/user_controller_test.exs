@@ -1,6 +1,5 @@
 defmodule EventsApiWeb.UserControllerTest do
   use EventsApiWeb.ConnCase, async: true
-
   import EventsApi.UserFixture
 
   setup %{conn: conn} do
@@ -19,6 +18,44 @@ defmodule EventsApiWeb.UserControllerTest do
 
       assert %{"nome" => "Henry", "email" => "henry@email.com", "id" => _} =
                json_response(conn, 200)
+    end
+  end
+
+  describe "signin" do
+    test "returnar um token quando email e senha válidos", %{conn: conn} do
+      user_fixture(%{name: "Henry", email: "henry@email.com", password: "123123"})
+
+      conn =
+        post(
+          conn,
+          Routes.user_path(conn, :signin, %{"email" => "henry@email.com", "password" => "123123"})
+        )
+
+      assert %{"user" => _} = json_response(conn, 201)
+    end
+
+    test "returnar um error quando email não válidos", %{conn: conn} do
+      user_fixture(%{name: "Henry", email: "henry@email.com", password: "123123"})
+
+      conn =
+        post(
+          conn,
+          Routes.user_path(conn, :signin, %{"email" => "henry@email", "password" => "123123"})
+        )
+
+      assert %{"message" => "unauthorizade"} = json_response(conn, 400)
+    end
+
+    test "returnar um error quando senha não válidos", %{conn: conn} do
+      user_fixture(%{name: "Henry", email: "henry@email.com", password: "123123"})
+
+      conn =
+        post(
+          conn,
+          Routes.user_path(conn, :signin, %{"email" => "henry@email.com", "password" => "123"})
+        )
+
+      assert %{"message" => "unauthorizade"} = json_response(conn, 400)
     end
   end
 

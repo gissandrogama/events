@@ -39,7 +39,7 @@ defmodule EventsApi.DoingsTest do
       user = user_fixture()
       params = Map.put(@valid_event, :user_id, user.id)
       {:ok, event} = Doings.create_event(params)
-      {:ok, result } = Doings.get_event!(event.id)
+      {:ok, result} = Doings.get_event!(event.id)
 
       assert result.title == "Inteligência Emocional"
     end

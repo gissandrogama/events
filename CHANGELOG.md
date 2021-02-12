@@ -2,8 +2,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-- login
-- atenticação
+
 
 ## [0.0.1] - 2021-02-10
 ### Added
@@ -30,5 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - criação de modulos do guardian: Guardian, Pipeline e error_handler
 - Adição de rota e função signin no controller do usuário
-
+- pipeline de atenticação
+- usuário para criar um evento e listar o usuário por id tem que está logado
+- teste de autenticação
+- teste de token
+- teste de signin
 
