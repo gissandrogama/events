@@ -13,6 +13,7 @@ defmodule EventsApiWeb.Router do
     pipe_through :api
 
     post "/users", UserController, :create
+
     post "/signin", UserController, :signin
     get "/events", EventController, :index
     get "/events/:id", EventController, :show
