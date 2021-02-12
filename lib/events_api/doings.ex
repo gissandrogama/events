@@ -24,7 +24,6 @@ defmodule EventsApi.Doings do
     |> Repo.insert()
   end
 
-
   @doc """
   Função lista todos os eventos persistidos no banco de dados.
 

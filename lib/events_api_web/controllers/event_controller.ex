@@ -15,6 +15,7 @@ defmodule EventsApiWeb.EventController do
     {:ok, user} = Guardian.Plug.current_resource(conn)
 
     event_params = Map.put(event_params, "user_id", user.id)
+
     with {:ok, event} <- Doings.create_event(event_params) do
       conn
       |> put_status(:created)
