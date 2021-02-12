@@ -47,6 +47,17 @@ defmodule EventsApiWeb.EnvetControllerTest do
       assert %{"id" => id} = json_response(conn, 200)
       assert id == event.id
     end
+
+    test "returnar erro quando evento não existe", %{conn: conn} do
+      user = user_fixture()
+      params = Map.put(@valid_event, :user_id, user.id)
+      Doings.create_event(params)
+      id_ivalid = "b1c75040-670a-4043-9a1f-cdeedb227ed1"
+
+      conn = get(conn, Routes.event_path(conn, :show, id_ivalid))
+
+      assert %{"errors" => %{"detail" => "Not Found"}} = json_response(conn, 404)
+    end
   end
 
   describe "create/2" do

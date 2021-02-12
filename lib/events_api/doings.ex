@@ -30,6 +30,10 @@ defmodule EventsApi.Doings do
   end
 
   def get_event!(id) do
-    Repo.get!(Event, id)
+    Repo.get_by(Event, id: id)
+    |> case do
+      nil -> {:error, :not_found}
+      event -> {:ok, event}
+    end
   end
 end

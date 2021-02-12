@@ -72,7 +72,8 @@ defmodule EventsApi.MixProject do
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:earmark, "~> 1.3", only: [:dev]},
       {:excoveralls, "~> 0.13.4", only: :test},
-      {:argon2_elixir, "~> 2.0"}
+      {:argon2_elixir, "~> 2.0"},
+      {:guardian, "~> 2.1"}
     ]
   end
 
